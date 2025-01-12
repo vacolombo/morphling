@@ -15,7 +15,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Splatter
   - 
   - 
   - 
@@ -40,4 +40,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Splatter
+    uniqueID: 3131808953
     locked: 0
