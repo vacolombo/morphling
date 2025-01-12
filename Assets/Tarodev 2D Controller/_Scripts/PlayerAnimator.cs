@@ -128,6 +128,7 @@ namespace TarodevController
             var color = r.color;
             _currentGradient = new ParticleSystem.MinMaxGradient(color * 0.9f, color * 1.2f);
             SetColor(_moveParticles);
+
         }
 
         private void SetColor(ParticleSystem ps)
