@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TarodevController;
@@ -18,7 +19,8 @@ public class SplatController : MonoBehaviour
   public GameObject[] splats;
 
   public IPlayerController playerController;
-  private bool _grounded;
+  public event Action<playerColor> ChangeColor;
+
 
   private void Awake()
   {
@@ -57,9 +59,9 @@ public class SplatController : MonoBehaviour
 
   public void MakeSplat()
   {
-    Vector3 randRotation = new Vector3(0f, 0f, Random.Range(0, 360f));
+    Vector3 randRotation = new Vector3(0f, 0f, UnityEngine. Random.Range(0, 360f));
 
-    var newSplat = Instantiate(splats[Random.Range(0, splats.Length)], player.transform.position, Quaternion.Euler(randRotation));
+    var newSplat = Instantiate(splats[UnityEngine.Random.Range(0, splats.Length)], player.transform.position, Quaternion.Euler(randRotation));
     var newSpriteRenderer = newSplat.GetComponent<SpriteRenderer>();
 
     newSpriteRenderer.color = color;
@@ -72,23 +74,15 @@ public class SplatController : MonoBehaviour
   {
     var hit = Physics2D.Raycast(player.transform.position, Vector3.down, 2);
 
-    //if (!hit || hit.collider.isTrigger || !hit.transform.TryGetComponent(out SpriteRenderer r)) return;
-
     if (hit)
     {
       hit.transform.TryGetComponent(out SpriteRenderer r);
+      hit.transform.TryGetComponent(out colorObject c);
 
       color = r ? r.color : color;
+      ChangeColor?.Invoke(c ? c.color : player.GetComponent<PlayerController>().playerColor);
     }
   }
 
-  //private void OnGroundedChanged(bool grounded, float ignore)
-  //{
-  //  _grounded = grounded;
 
-  //  if (grounded)
-  //  {
-  //    DetectGroundColor();
-  //  }
-  //}
 }
