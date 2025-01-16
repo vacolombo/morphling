@@ -19,7 +19,7 @@ public class SplatController : MonoBehaviour
   public GameObject[] splats;
 
   public IPlayerController playerController;
-  public event Action<playerColor> ChangeColor;
+  //public event Action<playerColor> ChangeColor;
 
 
   private void Awake()
@@ -77,10 +77,10 @@ public class SplatController : MonoBehaviour
     if (hit)
     {
       hit.transform.TryGetComponent(out SpriteRenderer r);
-      hit.transform.TryGetComponent(out colorObject c);
+      //hit.transform.TryGetComponent(out colorObject c);
 
       color = r ? r.color : color;
-      ChangeColor?.Invoke(c ? c.color : player.GetComponent<PlayerController>().playerColor);
+      //ChangeColor?.Invoke(c ? c.color : player.GetComponent<PlayerController>().playerColor);
     }
   }
 

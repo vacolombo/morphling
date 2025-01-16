@@ -14,9 +14,10 @@ public class colorObject : MonoBehaviour
     {playerColor.blue, new UnityEngine.Color(0.3450981f,0.5245275f,.8f)},
     {playerColor.green, new UnityEngine.Color(0.1137255f,0.5294118f,0.09411765f)}
   };
-
+  
   public playerColor color;
   public SpriteRenderer spriteRenderer;
+  public float alphaValue = .03f;
 
   public bool changeable = false;
 
@@ -31,29 +32,37 @@ public class colorObject : MonoBehaviour
 
   private void OnEnable()
   {
-    if (changeable)
-    {
-      splatController.ChangeColor += changeColor;
-    }
+    roundManager.Instance.RoundColorChange += handleRoundChange;
   }
 
   private void OnDisable()
   {
-    if (changeable)
-    {
-      splatController.ChangeColor -= changeColor;
-    }
+    roundManager.Instance.RoundColorChange -= handleRoundChange;
   }
-
-  //// Update is called once per frame
-  //void Update()
-  //{
-  //  spriteRenderer.color = objectColor[color];
-  //}
 
   private void changeColor(playerColor playerColor)
   {
     color = playerColor;
     spriteRenderer.color = objectColor[color];
+  }
+
+  private void handleRoundChange(playerColor roundColor)
+  {
+    if (changeable)
+    {
+      changeColor(roundColor);
+    }
+
+    if (roundManager.Instance.roundColor == color)
+    {
+      GetComponent<BoxCollider2D>().enabled = true;
+      spriteRenderer.color = objectColor[color];
+    } else
+    {
+      GetComponent<BoxCollider2D>().enabled = false;
+      Color transparent = objectColor[color];
+      transparent.a = alphaValue;
+      spriteRenderer.color = transparent;
+    }
   }
 }
