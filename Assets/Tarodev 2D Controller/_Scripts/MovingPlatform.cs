@@ -52,4 +52,21 @@ public class MovingPlatform : MonoBehaviour
     Gizmos.color = Color.yellow;
     Gizmos.DrawLineStrip(corners, true);
   }
+
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.CompareTag("Player"))
+    {
+      Debug.Log("On platform");
+      other.transform.parent = transform; // Parent the player to the platform
+    }
+  }
+
+  private void OnTriggerExit(Collider other)
+  {
+    if (other.CompareTag("Player"))
+    {
+      other.transform.parent = null; // Unparent the player when they leave the platform
+    }
+  }
 }

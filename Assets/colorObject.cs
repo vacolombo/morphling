@@ -27,7 +27,7 @@ public class colorObject : MonoBehaviour
   {
     spriteRenderer = GetComponent<SpriteRenderer>();
 
-    //spriteRenderer.color = objectColor[color];
+    handleRoundChange(roundManager.Instance.roundColor);
   }
 
   private void OnEnable()
