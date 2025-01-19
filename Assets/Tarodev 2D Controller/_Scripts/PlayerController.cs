@@ -30,7 +30,7 @@ namespace TarodevController
 
         #endregion
 
-        private float _time;
+        private float _time = 10f;
 
         private void Awake()
         {
@@ -120,7 +120,10 @@ namespace TarodevController
                 GroundedChanged?.Invoke(true, Mathf.Abs(_frameVelocity.y));
             }
             // Left the Ground
-            else if (_grounded && !groundHit)
+            //NEED TO FIX
+            //Checking the time against frameLeft helps smooth vertical platforms, but doesn't fix it.
+            //It is also effectively doubling the coyote time
+            else if (_grounded && !groundHit && _time > _frameLeftGrounded + _stats.CoyoteTime)
             {
                 _grounded = false;
                 _frameLeftGrounded = _time;
