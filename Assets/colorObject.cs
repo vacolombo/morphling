@@ -48,12 +48,17 @@ public class colorObject : MonoBehaviour
 
   private void handleRoundChange(playerColor roundColor)
   {
-    if (changeable)
-    {
-      changeColor(roundColor);
-    }
+    //if (changeable)
+    //{
+    //  changeColor(roundColor);
+    //}
 
-    if (roundManager.Instance.roundColor == color)
+    //if (color == playerColor.neutral)
+    //{
+    //  return;
+    //}
+
+    if (roundManager.Instance.roundColor == color || color == playerColor.neutral)
     {
       GetComponent<BoxCollider2D>().enabled = true;
       spriteRenderer.color = objectColor[color];
@@ -65,4 +70,16 @@ public class colorObject : MonoBehaviour
       spriteRenderer.color = transparent;
     }
   }
+
+  private void OnCollisionEnter2D(Collision2D collision)
+  {
+    if (changeable)
+    {
+      collision.gameObject.TryGetComponent(out PlayerController player);
+      Debug.Log(name);
+      playerColor playerColor = player ? collision.gameObject.GetComponent<PlayerController>().playerColor : color;
+      changeColor(playerColor);
+    }
+
+}
 }
