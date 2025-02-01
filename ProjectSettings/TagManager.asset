@@ -44,3 +44,6 @@ TagManager:
   - name: Splatter
     uniqueID: 3131808953
     locked: 0
+  - name: Foreground
+    uniqueID: 2232959967
+    locked: 0

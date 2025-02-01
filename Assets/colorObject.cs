@@ -18,7 +18,7 @@ public class colorObject : MonoBehaviour
   
     public playerColor color;
     public SpriteRenderer spriteRenderer;
-    public float alphaValue = .03f;
+    public float alphaValue = .1f;
 
     public bool changeable = false;
 
