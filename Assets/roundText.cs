@@ -21,9 +21,9 @@ public class roundText : MonoBehaviour
 
     private void handleRoundChange(playerColor color)
     {
-        roundNumber = roundManager.Instance.roundCount-1;
+        roundNumber = roundManager.Instance.roundCount;
 
-        if (roundNumber < 4)
+        if (roundNumber < 3)
         {
             textMeshPro.color = colorObject.objectColor[color];
             textMeshPro.text = "Round " + roundNumber.ToString() + ": " + color.ToString();

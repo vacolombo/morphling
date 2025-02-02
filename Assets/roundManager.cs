@@ -9,7 +9,7 @@ public class roundManager : MonoBehaviour
       public static roundManager Instance;
 
       public event Action<playerColor> RoundColorChange;
-      public playerColor roundColor;
+      public playerColor roundColor = playerColor.red;
 
 
       public int roundCount = 1;
@@ -32,7 +32,7 @@ public class roundManager : MonoBehaviour
     {
         if (round == -1)
         {
-            round = roundCount++;
+            round = roundCount + 1;
             round %= colorCount;
         }
 
